@@ -1,0 +1,43 @@
+module lab8_comparch( pcOut, clk, reset, romOut, offset, cout, rfEnable, selectRam, selectPC, selectReg);
+	input clk;
+	input reset;
+	input selectRam;
+	input selectPC;
+	input selectReg;
+	input rfEnable;
+	
+	output [31:0] romOut;
+	
+	
+	input [7:0] offset;
+	output [7:0] pcOut;
+	output cout;
+	
+	wire [4:0] rs1, rs2, rd;
+
+	lab7_PC pc_1 (pcOut, clk, reset, selectPC ,offset, cout);
+	lab7_ROM rom_1 (romOut, pcOut);
+	lab7_ID id_1 (romOut, rd, rs1, rs2);
+	
+	wire selectImm;
+	lab8_immGen imm_1 (romOut, selectImm, immOut);
+	
+	
+	lab3_combined reg_1 (rs1, regA, regB, rs2, rfEnable, reset, clk, ramMux, rsd);
+	
+	wire[7:0] aluOp;
+	wire [3:0] status;
+	lab4_combined alu_1 (regA, regB, 0, aluOp, status, aluOut);
+	
+	
+	wire wrEn;
+	lab5_top ram_1(aluOut, wrEn, clk, regB, ramOut);
+	
+	
+	wire [31:0] ramMux, aluOut, ramOut;
+	assign ramMux = selectRam? aluOut: ramOut;
+	
+	wire [31:0] regMux, immOut, regB, regA;
+	assign regMux = selectReg? immOut: regB;
+
+endmodule 
