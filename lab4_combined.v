@@ -36,7 +36,7 @@ assign L = A << c;
 assign R = A >> c; */
 	
 
-lab4_mux( F,
+lab4_mux uu( F,
 
   opcode,
   xout,
