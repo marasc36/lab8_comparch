@@ -1,4 +1,4 @@
-module lab8_comparch( pcOut, clk, reset, romOut, offset, cout, rfEnable, selectRam, selectPC, selectReg, aluOp, aluOut);
+module lab8_comparch( pcOut, clk, reset, romOut, offset, cout, rfEnable, selectRam, selectPC, selectReg, aluOp);
 	input clk;
 	input reset;
 	input selectRam;
