@@ -7,7 +7,6 @@ module lab8_comparch( pcOut, clk, reset, romOut, offset, cout, rfEnable, selectR
 	input rfEnable;
 	
 	output [31:0] romOut;
-	output
 	
 	
 	input [7:0] offset;
